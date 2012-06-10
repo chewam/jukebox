@@ -15,7 +15,7 @@ Ext.define('JB.controller.Main', {
     },
 
     onPlayerLoad: function() {
-        var socket = io.connect('http://home.chewam.com:3000');
+        var socket = io.connect('http://' + __HOST__);
 
         socket.on('queue', Ext.bind(this.onQueue, this));
     },

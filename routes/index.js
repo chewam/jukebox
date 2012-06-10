@@ -1,3 +1,5 @@
+var config = require('../config');
+
 exports.checkSession = function(req, res, next) {
     if (req.session.login) {
         next();
@@ -48,7 +50,8 @@ exports.channel = function(req, res) {
 exports.player = function(req, res) {
     res.render('player', {
         layout: false,
-        title: 'Player'
+        title: 'Player',
+        host: config.host
     });
 };
 

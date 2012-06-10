@@ -32,7 +32,7 @@ Ext.define('JB.controller.Player', {
         console.log('initPlayer');
         DZ.init({
             appId: '102941',
-            channelUrl: 'http://home.chewam.com:3000/channel',
+            channelUrl: 'http://'+ __HOST__ +'/channel',
             player: {
                 // container: 'player',
                 // cover: true,
