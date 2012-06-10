@@ -1,0 +1,107 @@
+// ALBUM
+@mixin jukebox-search {
+	.jb_search {
+
+		.x-list-item .x-list-item-label {
+			padding: 0;
+			display: -webkit-box;
+			-webkit-box-align: stretch;
+
+			.track-item {
+				-webkit-box-flex: 1;
+				padding: 0.65em 0.8em;
+				display: -webkit-box;
+				-webkit-box-align: stretch;
+
+				.info {
+					-webkit-box-flex: 1;
+					display: -webkit-box;
+					-webkit-box-align: stretch;
+					-webkit-box-orient: vertical;
+
+					.title {
+						-webkit-box-flex: 1;
+					}
+
+					.details {
+						color: #AAAAAA;
+						font-size: .8em;
+						overflow: hidden;
+						padding-right: 5px;
+						white-space:nowrap;
+						text-overflow: ellipsis;
+					}
+				}
+
+				.duration {
+					color: #AAAAAA;
+					font-size: .8em;
+					display: -webkit-box;
+					-webkit-box-pack: end;
+					-webkit-box-orient: vertical;
+				}
+			}
+
+			.artist-item {
+				-webkit-box-flex: 1;
+				padding: 0.65em 0.8em;
+				display: -webkit-box;
+				-webkit-box-align: stretch;
+
+				.picture {
+					width: 30px;
+					background-size: 100% auto;
+					background-repeat: no-repeat;
+				}
+
+				.info {
+					padding-left: 5px;
+					-webkit-box-flex: 1;
+					display: -webkit-box;
+					-webkit-box-pack: center;
+					-webkit-box-orient: vertical;
+
+					.name {						
+						overflow: hidden;
+						white-space: nowrap;
+						text-overflow: ellipsis;
+						
+					}
+				}
+			}
+
+			.album-item {
+				-webkit-box-flex: 1;
+				padding: 0.65em 0.8em;
+				display: -webkit-box;
+				-webkit-box-align: stretch;
+
+				.cover {
+					width: 30px;
+					background-size: 100% auto;
+					background-repeat: no-repeat;
+				}
+
+				.info {
+					padding-left: 5px;
+					-webkit-box-flex: 1;
+					display: -webkit-box;
+					-webkit-box-pack: center;
+					-webkit-box-orient: vertical;
+
+					.title {						
+						overflow: hidden;
+						white-space: nowrap;
+						text-overflow: ellipsis;
+					}
+
+					.artist {
+						color: #AAAAAA;
+						font-size: .8em;
+					}
+				}
+			}
+
+		}
+	}
+}

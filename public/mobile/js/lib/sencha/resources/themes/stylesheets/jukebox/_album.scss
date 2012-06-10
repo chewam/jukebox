@@ -1,0 +1,22 @@
+// ALBUM
+@mixin jukebox-album {
+	.jb_album_info,
+	.jb_artist_info {
+
+		.x-html {
+			display: -webkit-box;
+			-webkit-box-align: stretch;
+
+			.image {
+				width: 120px;
+				height: 120px;
+			}
+
+			.info {
+				padding-left: 16px;
+				-webkit-box-flex: 1;
+			}
+		}
+
+	}
+}

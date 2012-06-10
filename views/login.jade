@@ -1,0 +1,15 @@
+form.well.form-inline
+    input(type='text', placeholder='Enter your nickname...', name='login')
+    input(type='hidden', name='lat')
+    input(type='hidden', name='lng')
+    | &nbsp;
+    button.btn(type='submit') Submit
+
+script
+    if (navigator && navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(data) {
+            console.log(this, arguments);
+            document.forms[0].lat.value = data.coords.latitude;
+            document.forms[0].lng.value = data.coords.longitude;
+        });
+    }

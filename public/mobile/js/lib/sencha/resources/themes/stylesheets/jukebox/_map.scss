@@ -1,0 +1,21 @@
+// ALBUM
+@mixin jukebox-map {
+    .jb_map_details {
+        padding: 10px;
+
+        .x-docking-horizontal {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px -5px black;
+        }
+
+        .jb_map_details_actions {
+            padding: 5px 10px 10px 10px;
+
+            .x-button-plain {
+                padding: 0;
+                -webkit-box-pack: end;
+            }
+        }
+    }
+}

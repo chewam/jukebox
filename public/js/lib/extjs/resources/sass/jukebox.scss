@@ -1,0 +1,12 @@
+@import 'compass';
+@import 'neptune/default/all';
+
+.queue {
+
+    .artist, .album {
+        padding-left: 25px;
+        background-size: 20px 20px;
+        background-repeat: no-repeat;
+
+    }
+}

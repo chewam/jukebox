@@ -1,0 +1,20 @@
+// TRACK
+@mixin jukebox-track {
+    .jb_track {
+        
+        h1 {
+            font-size: 1.6em;
+        }
+
+        .artist, .album {
+            display: -webkit-box;
+
+            .img {
+                width: 80px;
+                height: 80px;
+                background-size: 100% auto;
+                background-repeat: no-repeat;
+            }
+        }
+    }
+}

@@ -1,0 +1,36 @@
+@import 'sencha-touch/default/all';
+
+$include-default-icons: false;
+
+@include sencha-panel;
+@include sencha-buttons;
+@include sencha-toolbar;
+@include sencha-toolbar-forms;
+@include sencha-list;
+@include sencha-layout;
+@include sencha-form;
+@include sencha-loading-spinner;
+// @include sencha-tabs;
+// @include sencha-sheet;
+// @include sencha-picker;
+// @include sencha-msgbox;
+// @include sencha-carousel;
+// @include sencha-indexbar;
+// @include sencha-list-paging;
+// @include sencha-list-pullrefresh;
+
+$theme-name: 'jukebox';
+
+@import 'jukebox/all';
+
+@include pictos-iconmask('artist');
+@include pictos-iconmask('search');
+@include pictos-iconmask('album');
+@include pictos-iconmask('track');
+@include pictos-iconmask('delete');
+
+@include jukebox-global;
+@include jukebox-album;
+@include jukebox-search;
+@include jukebox-map;
+@include jukebox-track;
