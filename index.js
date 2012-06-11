@@ -6,6 +6,8 @@ var sessionStore = new express.session.MemoryStore();
 
 var app = module.exports = express.createServer();
 
+events.init(app, sessionStore);
+
 // Configuration
 
 app.configure(function() {
@@ -42,8 +44,4 @@ app.get('/login', routes.login);
 app.get('/player', routes.checkSession, routes.player);
 app.get('/', routes.checkSession, routes.index);
 
-// app.listen(3000);
-
-events.init(app, sessionStore);
-
-// console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+module.exports = app;

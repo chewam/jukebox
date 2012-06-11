@@ -11,6 +11,7 @@ Ext.define('JB.controller.Main', {
     //         select: this.onNewStationSelect
     //     }
     // });
+        this.mon(this, 'trackend', this.onTrackEnd, this);
         this.mon(this, 'playerload', this.onPlayerLoad, this);
     },
 
@@ -20,21 +21,34 @@ Ext.define('JB.controller.Main', {
         socket.on('queue', Ext.bind(this.onQueue, this));
     },
 
-    onQueue: function (id) {
+    onQueue: function (data) {
         console.log('onQueue', arguments);
         var player = this.getController('Player');
 
-        player.play([id]);
-        this.loadTrackData(id);
+        // player.playTracks([id]);
+        player.enablePlayButton();
+        this.loadTrackData(data);
     },
 
-    loadTrackData: function(id) {
+    onTrackEnd: function(id) {
+        var queue = this.getController('Queue'),
+            history = this.getController('History');
+
+        track = queue.getTrackById(id);
+        console.log('onTrackEnd', id, track);
+        track.set('lastplay', new Date());
+        history.addTrack(track);
+        queue.removeTrack(track);
+    },
+
+    loadTrackData: function(data) {
         var queue = this.getController('Queue'),
             Track = Ext.ModelManager.getModel('JB.model.Track');
 
-        Track.load(id, {
+        Track.load(data.id, {
             success: function(track) {
-                console.log('on track load', this, arguments);
+                console.log('on track load', this, arguments, data.emitter);
+                track.set('emitter', data.emitter);
                 queue.addTrack(track);
             }
         });

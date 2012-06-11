@@ -1,15 +1,15 @@
-Ext.define('JB.view.Queue', {
+Ext.define('JB.view.History', {
 
     extend: 'Ext.grid.Panel',
 
-    alias: 'widget.queue',
+    alias: 'widget.history',
 
-    cls: 'queue',
+    cls: 'history',
 
     initComponent: function() {
 
         Ext.apply(this, {
-            store: 'Queue',
+            store: 'History',
             columns: [{
                 header: 'Title',
                 dataIndex: 'title',
@@ -32,6 +32,11 @@ Ext.define('JB.view.Queue', {
             }, {
                 text: 'Emitter',
                 dataIndex: 'emitter'
+            }, {
+                text: 'Last play',
+                dataIndex: 'lastplay',
+                xtype: 'datecolumn',
+                format:'H:i d/m/Y'
             }]
         });
 

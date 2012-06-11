@@ -11205,7 +11205,7 @@ textarea.x-form-invalid-field {
   vertical-align: middle;
   *vertical-align: auto;
   overflow: hidden; }
-  /* line 7, ../../../../../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+  /* line 7, ../../../../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.11.1/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
   .x-surface {
     *display: inline; }
 
@@ -12298,7 +12298,11 @@ textarea.x-form-invalid-field {
     unicode-bidi: bidi-override; }
 
 /* line 6, ../sass/jukebox.scss */
-.queue .artist, .queue .album {
-  padding-left: 25px;
-  background-size: 20px 20px;
+.queue .artist, .queue .album, .history .artist, .history .album {
+  padding-left: 17px;
+  background-size: 13px auto;
   background-repeat: no-repeat; }
+
+/* line 16, ../sass/jukebox.scss */
+#dz-root .app .facebox, #dz-root .app .overlay {
+  display: none; }

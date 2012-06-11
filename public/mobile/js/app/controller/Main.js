@@ -12,6 +12,11 @@ Ext.define('JB.controller.Main', {
                 xtype: 'jb_map',
                 selector: 'viewport jb_map'
             },
+            login: {
+                autoCreate: true,
+                xtype: 'jb_login',
+                selector: 'viewport jb_login'
+            },
             search: {
                 autoCreate: true,
                 xtype: 'jb_search',
@@ -29,15 +34,17 @@ Ext.define('JB.controller.Main', {
             }
         },
         before: {
-            showTrack: ['checkSource', 'showNavigation'],
-            showAlbum: ['checkSource', 'showNavigation'],
-            showArtist: ['checkSource', 'showNavigation'],
-            showSearch: ['checkSource']
+            showMap: ['checkLogin'],
+            showTrack: ['checkLogin', 'checkSource', 'showNavigation'],
+            showAlbum: ['checkLogin', 'checkSource', 'showNavigation'],
+            showArtist: ['checkLogin', 'checkSource', 'showNavigation'],
+            showSearch: ['checkLogin', 'checkSource'],
+            showDefaultRoute: ['checkLogin']
         },
         routes: {
-            // '': 'showDefaultRoute',
+            '': 'showDefaultRoute',
             'map': 'showMap',
-            // 'login': 'showLogin',
+            'login': 'showLogin',
             'search/:type/:query': 'showSearch',
             'search/:type': 'showSearch',
             'search': 'showSearch',
@@ -58,6 +65,14 @@ Ext.define('JB.controller.Main', {
         // Ext.Viewport.add(this.getMap());
     },
 
+    checkLogin: function(action) {
+        if (JB.utils.Config.getLogin()) {
+            action.resume();
+        } else {
+            this.redirectTo('login');
+        }
+    },
+
     checkSource: function(action) {
         if (JB.utils.Config.getSource()) {
             action.resume();
@@ -66,10 +81,20 @@ Ext.define('JB.controller.Main', {
         }
     },
 
+    showDefaultRoute: function() {
+
+    },
+
     showNavigation: function(action) {
         Ext.Viewport.add(this.getNavigation());
         Ext.Viewport.setActiveItem(this.getNavigation());
         action.resume();
+    },
+
+    showLogin: function() {
+        console.log('showLogin');
+        Ext.Viewport.add(this.getLogin());
+        Ext.Viewport.setActiveItem(this.getLogin());
     },
 
     showMap: function() {

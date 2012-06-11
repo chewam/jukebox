@@ -76,10 +76,11 @@ Ext.define('JB.controller.Track', {
         var panel = this.getActivePanel(),
             record = panel.getRecord(),
             id = record.getId(),
-            source = JB.utils.Config.getSource();
+            source = JB.utils.Config.getSource(),
+            emitter = JB.utils.Config.getLogin();
 
         Ext.Ajax.request({
-            url: '/api/queue/' + source.getId() + '/' + id,
+            url: '/api/queue/' + source.getId() + '/' + id + '?emitter=' + emitter,
             callback: function() {
                 console.log('queue callback', arguments);
             }

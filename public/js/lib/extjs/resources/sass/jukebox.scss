@@ -1,12 +1,20 @@
 @import 'compass';
 @import 'neptune/default/all';
 
-.queue {
+.queue, .history {
 
     .artist, .album {
-        padding-left: 25px;
-        background-size: 20px 20px;
+        padding-left: 17px;
+        background-size: 13px auto;
         background-repeat: no-repeat;
 
     }
+}
+
+#dz-root {
+    .app {
+        .facebox, .overlay {
+            display: none;
+        }
+    }    
 }

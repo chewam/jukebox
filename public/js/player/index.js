@@ -18,12 +18,14 @@ Ext.application({
     ],
 
     stores: [
-        'Tracks'
+        'Queue',
+        'History'
     ],
 
     controllers: [
         'Main',
         'Player',
-        'Queue'
+        'Queue',
+        'History'
     ]
 });

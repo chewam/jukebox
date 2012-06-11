@@ -27,6 +27,6 @@ Ext.application({
         'JB.utils.Templates'
     ],
 
-    controllers: ['Main', 'Map', 'Search', 'Track', 'Album', 'Artist']
+    controllers: ['Main', 'Login', 'Map', 'Search', 'Track', 'Album', 'Artist']
 
 });

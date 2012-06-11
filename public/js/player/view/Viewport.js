@@ -4,27 +4,28 @@ Ext.define('JB.view.Viewport', {
 
     layout: 'border',
 
-    requires: [
-        // 'JB.view.Player'
-    ],
-
     initComponent: function() {
 
         Ext.apply(this, {
             items: [{
-                // height: 80,
                 region: 'north',
                 xtype: 'player'
             }, {
-                html: 'pof',
-                title: 'Queue',
                 region: 'center',
-                xtype: 'queue'
+                xtype: 'tabpanel',
+                items: [{
+                    title: 'Queue',
+                    xtype: 'queue'
+                }, {
+                    title: 'History',
+                    xtype: 'history'
+                }]
             }, {
                 title: 'Navigation',
                 split: true,
                 width: '20%',
                 region: 'west',
+                collapsed: true,
                 collapsible: true
             }]
         });

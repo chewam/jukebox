@@ -10,25 +10,27 @@ Ext.define('JB.view.Player', {
             title: ' ',
             titleAlign: 'right',
             header: {
-            //     title: 'Player',
-            //     xtype: 'header',
-            //     titleAlign: 'right',
                 items: [{
-                    align: 'right',
-                    text: 'pof',
-                    xtype: 'button'
+                    text: 'Auto Play',
+                    action: 'autoplay',
+                    xtype: 'button',
+                    enableToggle: true
+                }, {
+                    width: 5,
+                    xtype: 'tbspacer'
+                }, {
+                    text: 'Play',
+                    action: 'play',
+                    xtype: 'button',
+                    disabled: true
+                }, {
+                    text: 'Pause',
+                    action: 'pause',
+                    xtype: 'button',
+                    hidden: true
                 }]
             },
-            // tools: [{
-            //     type: 'next'
-            // }],
             items: [{
-            //     height: 20,
-            //     xtype: 'panel',
-            //     tpl: [
-            //         '<div>{artist.name} - {title} ({album.title})</div>'
-            //     ]
-            // }, {
                 xtype: 'progressbar'
             }]
         });

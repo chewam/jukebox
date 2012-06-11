@@ -5,6 +5,7 @@ Ext.define('JB.utils.Config', {
     singleton: true,
 
     config: {
+        login: null,
         source: null
     },
 

@@ -152,18 +152,17 @@ exports.queue = function(req, res) {
         sessionId = null,
         id = req.params.id,
         source = req.params.source,
+        emitter = req.query.emitter,
         Events = require('../utils/events'),
         QueueMgr = require('../utils/queueMgr'),
         sessions = Events.store.sessions;
-
     console.log('---> queue: ' + id);
 
     var callback = function(session) {
-        console.log('session', session);
         if (session) {
             queue = QueueMgr.get(session.login);
             queue.set(id, {title: 'toto'});
-            Events.emit(source, 'queue', id);
+            Events.emit(source, 'queue', {id: id, emitter: emitter});
             res.json({success: true});
         } else {
             res.json({success: false});

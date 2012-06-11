@@ -10,93 +10,171 @@ Ext.define('JB.controller.Player', {
     }, {
         ref: 'progressbar',
         selector: 'player > progressbar'
-    // }, {
-    //     ref: 'infoPanel',
-    //     selector: 'player > panel'
+    }, {
+        ref: 'playButton',
+        selector: 'player button[action="play"]'
+    }, {
+        ref: 'pauseButton',
+        selector: 'player button[action="pause"]'
     }],
+
+    titleTpl: new Ext.XTemplate(
+        '<div>{[values.artist.name]} - {title} ({[values.album.title]})</div>'
+    ),
 
     init: function() {
         this.control({
             'player': {
                 render: this.onPlayerRender
+            },
+            'player button[action="play"]': {
+                click: this.onPlayButtonClick
+            },
+            'player button[action="pause"]': {
+                click: this.onPauseButtonClick
+            },
+            'player button[action="autoplay"]': {
+                toggle: this.onAutoplayButtonToggle
             }
+        });
+
+        Ext.getStore('Queue').on({
+            scope: this,
+            datachanged: this.onQueueChange
         });
     },
 
     onPlayerRender: function() {
-        console.log('onPlayerRender', this, arguments);
         this.initPlayer();
     },
 
     initPlayer: function() {
-        console.log('initPlayer');
         DZ.init({
             appId: '102941',
             channelUrl: 'http://'+ __HOST__ +'/channel',
             player: {
-                // container: 'player',
-                // cover: true,
-                // playlist: true,
-                // width: 729,
-                // height: 308,
-                // format: 'vertical',
-                onload: Ext.bind(this.onPlayerLoad, this)
+                onload: Ext.bind(this.onLoad, this)
             }
         });
 
-        DZ.Event.suscribe('player_play', Ext.bind(this.onPlay, this));
-        DZ.Event.suscribe('player_load', Ext.bind(this.onLoad, this));
-        DZ.Event.suscribe('player_paused', Ext.bind(this.onPause, this));
         DZ.Event.suscribe('current_track', Ext.bind(this.onTrackUpdate, this));
         DZ.Event.suscribe('player_position', Ext.bind(this.onPositionUpdate, this));
     },
 
-    onPlayerLoad: function() {
-        console.log('onPlayerLoad');
+    onLoad: function() {
         this.getController('Main').fireEvent('playerload');
     },
 
-    onPlay: function() {
-        console.log('onPlay', this, arguments);
-    },
-
     onTrackUpdate: function(data) {
-        console.log('onTrackUpdate', this, arguments);
-        var titleTpl = new Ext.Template('<div>{artist.name} - {title} ({album.title})</div>');
-        this.getPlayer().setTitle(titleTpl.apply(data.track));
+        var title = this.titleTpl.apply(data.track);
+
+        this.toggleButtons('play');
+        this.currentTrack = data.track;
+        this.getPlayer().setTitle(title);
     },
 
-    onLoad: function() {
-        console.log('onLoad', this, arguments);
-    },
-
-    onPause: function() {
-        console.log('onPause', this, arguments);
+    onQueueChange: function(store) {
+        if (!this.isPlaying) {
+            if (store.getCount()) {
+                this.enablePlayButton();
+                if (this.autoPlay) {
+                    this.play();
+                }
+            } else {
+                this.disablePlayButton();
+            }
+        }
     },
 
     onPositionUpdate: function(progress) {
         var value = progress[0] / progress[1],
             progressbar = this.getProgressbar();
 
-        console.log('onPositionUpdate', progress[0], progress[1], value);
-        
         progressbar.updateProgress(value, '', true);
 
-        if (!progress[0] && !progress[1]) {
+        if (!progress[0] && !progress[1] && this.isPlaying) {
             this.resetPlayer();
+            this.play();
+        } else if (progress[0]) {
+            this.isPlaying = true;
         }
+    },
+
+    onPlayButtonClick: function(button, event) {
+        this.toggleButtons('play');
+        this.play();
+    },
+
+    onPauseButtonClick: function(button, event) {
+        this.toggleButtons('pause');
+        DZ.player.pause();
     },
 
     /*****/
 
-    play: function(tracks) {
+    playTracks: function(tracks) {
         DZ.player.playTracks(tracks, 0, function(response) {
-            console.log("track list", response.tracks);
+            console.info("playTracks", response.tracks);
         });
     },
 
+    play: function() {
+        if (!this.currentTrack) {
+            var track,
+                store = Ext.getStore('Queue');
+
+            if (store.getCount()) {
+                track = store.first();
+                this.playTracks([track.getId()]);
+            }
+        } else {
+            DZ.player.play();
+        }
+    },
+
+    pause: function() {
+        DZ.player.pause();
+    },
+
     resetPlayer: function() {
+        var id = this.currentTrack.id,
+            store = Ext.getStore('Queue'),
+            controller = this.getController('Main');
+
+        controller.fireEvent('trackend', id);
+
+        this.isPlaying = false;
+        this.currentTrack = false;
+        this.toggleButtons('pause');
         this.getPlayer().setTitle(' ');
+        if (!store.getCount()) {
+            this.disablePlayButton();
+        }
+    },
+
+    enablePlayButton: function() {
+        this.getPlayButton().enable();
+    },
+
+    disablePlayButton: function() {
+        this.getPlayButton().disable();
+    },
+
+    toggleButtons: function(state) {
+        if (state === 'pause') {
+            this.getPauseButton().hide();
+            this.getPlayButton().show();
+        } else {
+            this.getPlayButton().hide();
+            this.getPauseButton().show();
+        }
+    },
+
+    onAutoplayButtonToggle: function(button, pressed) {
+        this.autoPlay = pressed;
+        if (pressed && !this.isPlaying) {
+            this.play();
+        }
     }
 
 });

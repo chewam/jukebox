@@ -55,7 +55,7 @@ EventManager.prototype.getSocket = function(id) {
 
 EventManager.prototype.emit = function(login, event, data) {
     var socket = this.getSocket(login);
-    console.log('EMIT', login, event, socket);
+    console.log('EMIT', login, event);
     if (socket) {
         console.log('EMIT', event);
         socket.emit(event, data);
