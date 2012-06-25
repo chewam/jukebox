@@ -1,0 +1,97 @@
+// HOME
+@mixin jukebox-home {
+
+    .jb_home {
+
+        .jb_home_source {
+
+            .x-innerhtml {
+                display: -webkit-box;
+
+                .image {
+                    width: 70px;
+                    height: 70px;
+                    border-radius: .4em;
+                    background-size: cover;
+                }
+
+                .info {
+                    padding-left: 6px;
+                    -webkit-box-flex: 1;
+
+                    .name {
+                        font-size: 1.4em;
+                        font-weight: 500;
+                        text-transform : capitalize;
+                        font-family: 'Museo 500', sans-serif;
+                    }
+                }
+            }
+        }
+
+        .jb_home_user {
+
+            .x-html {
+                padding: 6px;
+                border-radius: .4em .4em 0 0;
+            }
+
+            .jb_home_user_info {
+                border-bottom: 1px solid #DEDEDE;
+
+                .x-innerhtml {
+                    display: -webkit-box;
+
+                    .image {
+                        width: 70px;
+                        height: 70px;
+                        border-radius: .4em;
+                        background-size: cover;
+                    }
+
+                    .info {
+                        padding-left: 6px;
+                        -webkit-box-flex: 1;
+
+                        .login {
+                            font-size: 1.4em;
+                            font-weight: 500;
+                            text-transform : capitalize;
+                            font-family: 'Museo 500', sans-serif;
+                        }
+                    }
+                }
+            }
+
+            .x-button-plain {
+                height: auto;
+                border-radius: 0;
+                padding: 0.5em 0.5em;
+                border-right: 1px solid #DEDEDE;
+                background-color: white;
+
+                &:first-child {
+                    border-radius: 0 0 0 .4em;
+                }
+
+                &:last-child {
+                    border-right: none;
+                    border-radius: 0 0 .4em 0;
+                }
+
+                .x-button-label {
+                    color: #BBB;
+                    font-size: .7em;
+                    text-align: left;
+                    text-shadow: none;
+
+                    .count {
+                        color: #000;
+                        font-size: 1.6em;
+                        line-height: 1.2em;
+                    }
+                }
+            }
+        }
+    }
+}

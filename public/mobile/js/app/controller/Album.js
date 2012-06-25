@@ -44,6 +44,7 @@ Ext.define('JB.controller.Album', {
         var model = JB.model.Album,
             panel = this.getActivePanel(),
             infoPanel = panel.down('jb_album_info'),
+            artistPanel = panel.down('container[role="artist"]'),
             tracksList = panel.down('jb_album_tracks'),
             id = document.location.hash.split('/')[1];
 
@@ -54,6 +55,7 @@ Ext.define('JB.controller.Album', {
             success: function(record) {
                 console.log('load album', id, record, record.tracks());
                 infoPanel.setRecord(record);
+                artistPanel.setRecord(record);
                 tracksList.setStore(record.tracks());
                 panel.setMasked(false);
             }

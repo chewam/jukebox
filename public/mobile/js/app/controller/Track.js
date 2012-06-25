@@ -43,7 +43,6 @@ Ext.define('JB.controller.Track', {
     loadTrack: function() {
         var model = JB.model.Track,
             panel = this.getActivePanel(),
-            audio = panel.down('audio'),
             id = document.location.hash.split('/')[1];
 
         panel.setMasked({xtype: 'loadmask'});
@@ -52,11 +51,23 @@ Ext.define('JB.controller.Track', {
             scope: this,
             success: function(record) {
                 console.log('load track', id, record);
-                audio.setUrl(record.get('preview'));
-                panel.setRecord(record);
-                panel.setMasked(false);
+                this.updatePanel(record);
             }
         });
+    },
+
+    updatePanel: function(record) {
+        var panel = this.getActivePanel(),
+            audio = panel.down('audio'),
+            title = panel.down('container[role="title"]'),
+            artist = panel.down('container[role="artist"]'),
+            album = panel.down('container[role="album"]');
+
+        audio.setUrl(record.get('preview'));
+        title.setRecord(record);
+        artist.setRecord(record);
+        album.setRecord(record);
+        panel.setMasked(false);
     },
 
     onPanelActivate: function(panel) {
@@ -89,7 +100,8 @@ Ext.define('JB.controller.Track', {
 
     onAlbumButtonTap: function() {
         var panel = this.getActivePanel(),
-            record = panel.getRecord(),
+            title = panel.down('container[role="title"]'),
+            record = title.getRecord(),
             album = record.getAlbum();
 
         this.redirectTo(album);
@@ -97,7 +109,8 @@ Ext.define('JB.controller.Track', {
 
     onArtistButtonTap: function() {
         var panel = this.getActivePanel(),
-            record = panel.getRecord(),
+            title = panel.down('container[role="title"]'),
+            record = title.getRecord(),
             artist = record.getArtist();
 
         this.redirectTo(artist);

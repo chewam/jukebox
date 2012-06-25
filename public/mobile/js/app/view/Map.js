@@ -2,16 +2,18 @@ Ext.define('JB.view.Map', {
 
     xtype: 'jb_map',
 
-    extend: 'Ext.Container',
+    extend: 'Ext.Panel',
 
     config: {
-        layout: 'fit',
+        cls: 'jb_map',
+        ui: 'default',
+        layout: {
+            type: 'hbox',
+            align: 'stretch'
+        },
         items: [{
-            docked: 'top',
-            xtype: 'toolbar',
-            title: 'MAP'
-        }, {
             xtype: 'map',
+            flex: 1,
             useCurrentLocation: true,
             mapOptions: {
                 zoom: 17

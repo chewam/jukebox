@@ -7,6 +7,7 @@ Ext.define('JB.controller.Map', {
         mapPanel: null,
         views: ['Map', 'map.Details'],
         refs: {
+            map: 'jb_map',
             detailsPanel: {
                 autoCreate: true,
                 xtype: 'jb_map_details',
@@ -14,11 +15,14 @@ Ext.define('JB.controller.Map', {
             }
         },
         control: {
-            'jb_map': {
+            map: {
                 activate: 'onPanelActivate'
             },
             'jb_map map': {
                 maprender: 'onMapRender'
+            },
+            'jb_map button[action="back"]': {
+                tap: 'onBackButtonTap'
             },
             'viewport jb_map_details button[action="close"]': {
                 tap: 'onCloseButtonTap'
@@ -37,6 +41,10 @@ Ext.define('JB.controller.Map', {
 
     onPanelActivate: function(panel) {
         console.log('onPanelActivate map');
+    },
+
+    onBackButtonTap: function() {
+        this.redirectTo('');
     },
 
     onMapRender: function(panel) {
@@ -180,7 +188,8 @@ Ext.define('JB.controller.Map', {
     showDetails: function(record) {
         var detailsPanel = this.getDetailsPanel();
 
-        Ext.Viewport.add(detailsPanel);
+        // Ext.Viewport.add(detailsPanel);
+        this.getMap().add(detailsPanel);
         detailsPanel.setRecord(record);
         detailsPanel.show();
     },
@@ -197,7 +206,8 @@ Ext.define('JB.controller.Map', {
 
         JB.utils.Config.setSource(record);
         detailsPanel.hide();
-        Ext.defer(this.redirectTo, 500, this, ['search/track']);
+        // Ext.defer(this.redirectTo, 500, this, ['search/track']);
+        Ext.defer(this.redirectTo, 500, this, ['']);
     }
 
 });

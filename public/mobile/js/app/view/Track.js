@@ -7,27 +7,85 @@ Ext.define('JB.view.Track', {
     config: {
         title: 'TRACK',
         cls: 'jb_track',
-        styleHtmlContent: true,
-        tpl: JB.utils.Templates.getTrackTpl(),
         items: [{
-            docked: 'bottom',
-            xtype: 'toolbar',
+            ui: 'default',
+            xtype: 'panel',
+            layout: 'hbox',
             items: [{
-                action: 'album',
-                xtype: 'button',
-                text: 'album'
+                flex: 1,
+                xtype: 'container',
+                // styleHtmlContent: true,
+                items: [{
+                    role: 'title',
+                    xtype: 'container',
+                    styleHtmlContent: true,
+                    tpl: JB.utils.Templates.getTrackTitleTpl()
+                }, {
+                    xtype: 'audio'
+                }]
             }, {
-                action: 'artist',
-                xtype: 'button',
-                text: 'artist'
-            }, {
+                ui: 'action',
                 action: 'queue',
-                xtype: 'button',
-                text: 'queue'
+                margin: '0 0 0 8',
+                iconMask: true,
+                iconCls: 'arrow_right',
+                xtype: 'button'
             }]
         }, {
-            xtype: 'audio',
-            docked: 'bottom'
+            ui: 'default',
+            xtype: 'panel',
+            layout: 'hbox',
+            items: [{
+                flex: 1,
+                role: 'artist',
+                xtype: 'container',
+                styleHtmlContent: true,
+                tpl: JB.utils.Templates.getTrackArtistTpl()
+            }, {
+                ui: 'action',
+                action: 'artist',
+                xtype: 'button',
+                margin: '0 0 0 8',
+                iconMask: true,
+                iconCls: 'arrow_right'
+            }]
+        }, {
+            ui: 'default',
+            xtype: 'panel',
+            layout: 'hbox',
+            items: [{
+                flex: 1,
+                role: 'album',
+                xtype: 'container',
+                styleHtmlContent: true,
+                tpl: JB.utils.Templates.getTrackAlbumTpl()
+            }, {
+                ui: 'action',
+                action: 'album',
+                xtype: 'button',
+                margin: '0 0 0 8',
+                iconMask: true,
+                iconCls: 'arrow_right'
+            }]
+        // }, {
+            // docked: 'bottom',
+            // xtype: 'toolbar',
+            // items: [{
+            //     action: 'album',
+            //     xtype: 'button',
+            //     text: 'album'
+            // }, {
+            //     action: 'artist',
+            //     xtype: 'button',
+            //     text: 'artist'
+            // // }, {
+            //     action: 'queue',
+            //     xtype: 'button',
+            //     text: 'queue'
+            // }]
+        // }, {
+        //     xtype: 'audio',
+        //     docked: 'bottom'
         }]
     }
 

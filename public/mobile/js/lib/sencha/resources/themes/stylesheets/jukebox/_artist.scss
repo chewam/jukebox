@@ -1,0 +1,41 @@
+// ARTIST
+@mixin jukebox-artist {
+    .jb_artist_info {
+
+        z-index: 1;
+        position: relative;
+        box-shadow: 0 0 20px 25px $theme-color;
+
+        .x-html {
+            padding: 8px;
+            display: -webkit-box;
+            -webkit-box-align: stretch;
+
+            .image {
+                width: 100px;
+                height: 100px;
+                border-radius: .4em;
+                background-size: cover;
+                background-clip: content-box;
+                border: 6px solid rgba(255, 255, 255, .4);
+                box-shadow: 0 0 5px -2px rgba(0, 0, 0, 0.4);
+            }
+
+            .info {
+                padding-left: 16px;
+                -webkit-box-flex: 1;
+                color: darken($theme-color, 50);
+                text-shadow: 0 1px 0 lighten($theme-color, 5);
+
+                .name {
+                    color: darken($theme-color, 55);
+                    font-size: 1.4em;
+                    font-weight: 500;
+                    text-shadow: 0 1px 0 lighten($theme-color, 5);
+                    font-family: 'Museo 500', sans-serif;
+                }
+            }
+        }
+
+    }
+}

@@ -5,7 +5,7 @@ Ext.define('JB.controller.Login', {
     config: {
         views: ['Login'],
         refs: {
-            form: 'jb_login' 
+            form: 'jb_login'
         },
         control: {
             'jb_login button[action="signin"]': {
@@ -25,15 +25,19 @@ Ext.define('JB.controller.Login', {
     },
 
     onSignInButtonTap: function() {
-        var form = this.getForm(),
+        var user,
+            form = this.getForm(),
             values = form.getValues(),
-            login = values.login;
+            login = values.login,
+            store = Ext.getStore('users');
 
         if (login && login.length) {
-            JB.utils.Config.setLogin(login);
-            this.redirectTo('map');
+            store.removeAll();
+            user = store.add({login: login});
+            store.sync();
+            JB.utils.Config.setUser(user);
+            this.redirectTo('');
         }
-        console.log('onSignInButtonTap', values);
     }
 
 });

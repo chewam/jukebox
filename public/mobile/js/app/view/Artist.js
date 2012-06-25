@@ -16,7 +16,7 @@ Ext.define('JB.view.Artist', {
             align: 'stretch'
         },
         items: [{
-            height: 160,
+            height: 110,
             xtype: 'jb_artist_info'
         }, {
             flex: 1,

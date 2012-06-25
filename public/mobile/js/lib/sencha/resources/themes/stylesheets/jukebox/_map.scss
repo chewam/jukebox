@@ -1,7 +1,11 @@
 // ALBUM
 @mixin jukebox-map {
+    .jb_map {
+        padding: 8px;
+    }
+
     .jb_map_details {
-        padding: 10px;
+        padding: 7px;
 
         .x-docking-horizontal {
             background: white;

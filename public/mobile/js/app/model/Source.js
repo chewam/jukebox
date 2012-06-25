@@ -6,7 +6,8 @@ Ext.define('JB.model.Source', {
         fields: [
             'id',
             'lat',
-            'lng'
+            'lng',
+            {name: 'img', defaultValue: 'http://placehold.it/70x70'}
         ],
         proxy: {
             type: 'rest',

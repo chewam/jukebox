@@ -1,3 +1,9 @@
+// @import url(http://fonts.googleapis.com/css?family=PT+Sans|Exo:900italic);
+
+$list-bg-color: rgba(0, 0, 0, 0);
+$page-bg-color: transparent;
+$form-bg-color: transparent;
+
 @import 'sencha-touch/default/all';
 
 $include-default-icons: false;
@@ -10,7 +16,7 @@ $include-default-icons: false;
 @include sencha-layout;
 @include sencha-form;
 @include sencha-loading-spinner;
-// @include sencha-tabs;
+@include sencha-tabs;
 // @include sencha-sheet;
 // @include sencha-picker;
 // @include sencha-msgbox;
@@ -19,7 +25,11 @@ $include-default-icons: false;
 // @include sencha-list-paging;
 // @include sencha-list-pullrefresh;
 
+// @include sencha-toolbar-ui('black', #444);
+
 $theme-name: 'jukebox';
+
+$theme-color: darken(#C0DEED, 3%);
 
 @import 'jukebox/all';
 
@@ -28,9 +38,21 @@ $theme-name: 'jukebox';
 @include pictos-iconmask('album');
 @include pictos-iconmask('track');
 @include pictos-iconmask('delete');
+@include pictos-iconmask('list');
+@include pictos-iconmask('locate');
+@include pictos-iconmask('home');
+@include pictos-iconmask('arrow_right');
 
 @include jukebox-global;
+@include jukebox-home;
 @include jukebox-album;
+@include jukebox-artist;
 @include jukebox-search;
 @include jukebox-map;
 @include jukebox-track;
+
+@include sencha-button-ui('default', $toolbar-base-color);
+@include sencha-toolbar-ui('trans', rgba(0, 0, 0, 0));
+@include sencha-toolbar-ui('default', $toolbar-base-color);
+@include sencha-tabbar-ui('black', #101010, $tabs-bar-gradient, #AAA);
+// @include sencha-tabbar-ui('black', #101010, $tabs-bar-gradient, lighten(saturate(#101010, 20%), 20%));

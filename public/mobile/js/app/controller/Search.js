@@ -29,6 +29,9 @@ Ext.define('JB.controller.Search', {
             },
             'jb_search_typelist radiofield': {
                 check: 'onTypeRadioFieldCheck'
+            },
+            'jb_search button[action="back"]': {
+                tap: 'onBackButtonTap'
             }
         }
     },
@@ -143,6 +146,10 @@ Ext.define('JB.controller.Search', {
         store.setModel(model);
         // WTF: why store.setModel doesn't reset reader's model ?
         store.getProxy().getReader().setModel(model);
+    },
+
+    onBackButtonTap: function() {
+        this.redirectTo('');
     }
 
 });

@@ -1,10 +1,163 @@
 // GLOBAL
 @mixin jukebox-global {
-	body {
-		background-color: black;
-	}
 
-    // .x-html h1 {
-    //     font-size: 2em;
-    // }
+    @font-face {
+        font-family: "Museo 300";
+        src: url("../font/Museo300-Regular.otf");
+    }
+
+    @font-face {
+        font-family: "Museo 500";
+        src: url("../font/Museo500-Regular.otf");
+    }
+
+    @font-face {
+        font-family: "Museo 700";
+        src: url("../font/Museo700-Regular.otf");
+    }
+
+	body {
+        font-weight: 300;
+		background-color: $theme-color;
+        background-repeat: no-repeat;
+        font-family: 'Museo 300', sans-serif;
+        // font-family: 'HelveticaNeue', sans-serif;
+        background-position: 0 -30px;
+        background-image: url(/mobile/img/clouds.png);
+	}
+}
+
+.x-title {
+    font-weight: 700;
+    font-style: italic;
+    font-family: 'Museo 700', sans-serif;
+}
+
+.x-panel-default {
+    padding: 8px 6px 0;
+
+    .x-panel-inner {
+        padding: 6px;
+        border-radius: .4em;
+        background-color: rgba(255, 255, 255, .4);
+        box-shadow: 0 0 5px -2px rgba(0, 0, 0, 0.4);
+
+        .x-html {
+            padding: 8px;
+            border-radius: .4em;
+            background-color: white;
+        }
+    }
+}
+
+// .x-panel-solid {
+//     margin: 8px 8px 0;
+//     border: 8px solid rgba(255, 255, 255, .4);
+
+//     .x-panel-inner {
+//         // padding: 8px;
+//         border-radius: .4em;
+//         background-color: white;
+//         // border: 8px solid rgba(255, 255, 255, .4);
+//         box-shadow: 0 0 5px -2px rgba(0, 0, 0, 0.4);
+
+//         // .x-html {
+//         //     padding: 8px;
+//         //     border-radius: .4em;
+//         //     background-color: white;
+//         // }
+//     }
+// }
+
+.x-list-round {
+
+    .x-scroll-view {
+        background-color: transparent !important;
+
+        .x-list-inner {
+            margin-top: 16px;
+            padding-bottom: 16px;
+        }
+
+        .x-list-container {
+            margin: 8px;
+            border-radius: .4em;
+            padding: 0;
+            border: 8px solid rgba(255, 255, 255, 0.4);
+            // background-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 5px -2px rgba(0, 0, 0, 0.4);
+
+            .x-list-item {
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                .x-list-item-label {
+                    font-size: .8em;
+                }
+            }
+        }
+    }
+}
+
+.x-toolbar {
+    height: 2.2em;
+
+    .x-title {
+        font-size: 1.4em;
+        line-height: 1.7em;
+    }
+
+    .x-field {
+        margin: 0.1em .3em;
+    }
+
+    &.x-toolbar-default {
+
+        &.x-docked-top {
+            border-bottom-color: darken($toolbar-base-color, 20);
+        }
+
+        .x-title {
+            color: darken($toolbar-base-color, 20);
+            text-shadow: 0 1px 0 lighten($toolbar-base-color, 10);
+        }
+    }
+
+    .x-button-default {
+        padding: 0em 0.5em;
+    }
+}
+
+.x-form-default {
+
+    .x-scroll-container > .x-inner {
+        padding: 8px;
+    }
+
+    .x-form-fieldset {
+
+        .x-form-fieldset-inner {
+            padding: 8px;
+            border: none;
+            background: rgba(255, 255, 255, .4);
+            box-shadow: 0 0 5px -2px rgba(0, 0, 0, 0.4);
+        }
+
+        .x-field {
+            border-radius: .4em;
+            border: 1px solid #DDD;
+            background: white;
+        }
+    }
+}
+
+.x-button {
+
+    .x-button-label {
+        font-weight: 500;
+        font-family: 'Museo 500', sans-serif;
+        text-shadow: 0 -.08em 0 rgba(0, 0, 0, 0.4);
+    }
 }

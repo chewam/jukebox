@@ -3,19 +3,31 @@ Ext.define('JB.controller.Main', {
     extend: 'Ext.app.Controller',
 
     config: {
-        views: ['Navigation'],
-        models: ['Artist', 'Album', 'Track', 'Tracks', 'Source'],
-        stores: ['Artists', 'Albums', 'Tracks', 'Search', 'Sources'],
+        views: ['Navigation', 'TabPanel'],
+        models: ['Artist', 'Album', 'Track', 'Tracks', 'Source', 'User'],
+        stores: ['Artists', 'Albums', 'Tracks', 'Search', 'Sources', 'Users'],
         refs: {
-            map: {
-                autoCreate: true,
-                xtype: 'jb_map',
-                selector: 'viewport jb_map'
-            },
+            home: 'jb_home',
+            // home: {
+            //     autoCreate: true,
+            //     xtype: 'jb_home',
+            //     selector: 'viewport jb_home'
+            // },
+            map: 'jb_tabpanel jb_map',
+            // map: {
+            //     autoCreate: true,
+            //     xtype: 'jb_map',
+            //     selector: 'viewport jb_map'
+            // },
             login: {
                 autoCreate: true,
                 xtype: 'jb_login',
                 selector: 'viewport jb_login'
+            },
+            source: {
+                autoCreate: true,
+                xtype: 'jb_source',
+                selector: 'viewport jb_source'
             },
             search: {
                 autoCreate: true,
@@ -26,6 +38,11 @@ Ext.define('JB.controller.Main', {
                 autoCreate: true,
                 xtype: 'jb_navigation',
                 selector: 'viewport jb_navigation'
+            },
+            tabPanel: {
+                autoCreate: true,
+                xtype: 'jb_tabpanel',
+                selector: 'viewport jb_tabpanel'
             }
         },
         control: {
@@ -34,15 +51,16 @@ Ext.define('JB.controller.Main', {
             }
         },
         before: {
-            showMap: ['checkLogin'],
-            showTrack: ['checkLogin', 'checkSource', 'showNavigation'],
-            showAlbum: ['checkLogin', 'checkSource', 'showNavigation'],
-            showArtist: ['checkLogin', 'checkSource', 'showNavigation'],
+            showMap: ['checkLogin', 'showTabPanel'],
+            showSource:['checkLogin', 'checkSource'],
+            showTrack: ['checkLogin'/*, 'checkSource'*/, 'showNavigation'],
+            showAlbum: ['checkLogin'/*, 'checkSource'*/, 'showNavigation'],
+            showArtist: ['checkLogin'/*, 'checkSource'*/, 'showNavigation'],
             showSearch: ['checkLogin', 'checkSource'],
-            showDefaultRoute: ['checkLogin']
+            showHome: ['checkLogin', 'showTabPanel']
         },
         routes: {
-            '': 'showDefaultRoute',
+            '': 'showHome',
             'map': 'showMap',
             'login': 'showLogin',
             'search/:type/:query': 'showSearch',
@@ -50,23 +68,25 @@ Ext.define('JB.controller.Main', {
             'search': 'showSearch',
             'track/:id': 'showTrack',
             'album/:id': 'showAlbum',
-            'artist/:id': 'showArtist'
+            'artist/:id': 'showArtist',
+            'source/:id': 'showSource'
         }
     },
 
-    init: function() {
-        console.log('init');
-    },
+    // init: function() {
+        // console.log('init');
+    // },
 
-    launch: function() {
-        console.log('launch');
+    // launch: function() {
+        // console.log('launch');
         // Ext.Viewport.add(this.getNavigation());
         // Ext.Viewport.add(this.getSearch());
         // Ext.Viewport.add(this.getMap());
-    },
+    // },
 
     checkLogin: function(action) {
-        if (JB.utils.Config.getLogin()) {
+        console.log('checkLogin', JB.utils.Config.getUser());
+        if (JB.utils.Config.getUser()) {
             action.resume();
         } else {
             this.redirectTo('login');
@@ -74,18 +94,30 @@ Ext.define('JB.controller.Main', {
     },
 
     checkSource: function(action) {
+        console.log('checkSource', JB.utils.Config.getSource());
         if (JB.utils.Config.getSource()) {
             action.resume();
         } else {
-            this.redirectTo('map');
+            this.redirectTo('');
         }
     },
 
-    showDefaultRoute: function() {
+    showTabPanel: function(action) {
+        console.log('showTabPanel');
+        Ext.Viewport.add(this.getTabPanel());
+        Ext.Viewport.setActiveItem(this.getTabPanel());
+        action.resume();
+    },
 
+    showHome: function() {
+        console.log('showHome');
+        this.getTabPanel().setActiveItem(this.getHome());
+        // Ext.Viewport.add(this.getHome());
+        // Ext.Viewport.setActiveItem(this.getHome());
     },
 
     showNavigation: function(action) {
+        console.log('showNavigation');
         Ext.Viewport.add(this.getNavigation());
         Ext.Viewport.setActiveItem(this.getNavigation());
         action.resume();
@@ -99,8 +131,15 @@ Ext.define('JB.controller.Main', {
 
     showMap: function() {
         console.log('showMap');
-        Ext.Viewport.add(this.getMap());
-        Ext.Viewport.setActiveItem(this.getMap());
+        this.getTabPanel().setActiveItem(this.getMap());
+        // Ext.Viewport.add(this.getMap());
+        // Ext.Viewport.setActiveItem(this.getMap());
+    },
+
+    showSource: function() {
+        console.log('showSource');
+        Ext.Viewport.add(this.getSource());
+        Ext.Viewport.setActiveItem(this.getSource());
     },
 
     showSearch: function() {

@@ -30,6 +30,8 @@ app.configure('production', function() {
 });
 
 // Routes
+
+// API
 app.get('/api/queue/:source/:id', routes.queue);
 app.get('/api/sources', routes.sources);
 app.get('/api/search', routes.search);
@@ -38,10 +40,16 @@ app.get('/api/artist/:id', routes.artist);
 app.get('/api/album/:id', routes.album);
 app.get('/api/track/:id', routes.track);
 app.get('/api/search', routes.search);
+
+// DEEZER
 app.get('/channel', routes.channel);
-app.get('/logout', routes.logout);
-app.get('/login', routes.login);
+
+// PLAYER
 app.get('/player', routes.checkSession, routes.player);
+
+// WEB SITE
+app.get('/login', routes.login);
+app.get('/logout', routes.logout);
 app.get('/', routes.checkSession, routes.index);
 
 module.exports = app;

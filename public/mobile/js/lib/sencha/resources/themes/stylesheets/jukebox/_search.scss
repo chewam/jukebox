@@ -2,6 +2,21 @@
 @mixin jukebox-search {
 	.jb_search {
 
+		.x-toolbar-trans {
+			z-index: 1;
+			height: 2.8em;
+        	position: relative;
+        	padding: 0.6em 0.2em 75px;
+        	box-shadow: 0 0 20px 25px $theme-color;
+
+        	.x-field-search {
+        		.x-component-outer {
+        			border: 1px solid darken($theme-color, 50%);
+        			-webkit-box-shadow: inset 0 0 8px -3px darken($theme-color, 70%);
+        		}
+        	}
+		}
+
 		.x-list-item .x-list-item-label {
 			padding: 0;
 			display: -webkit-box;
